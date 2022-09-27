@@ -51,8 +51,10 @@ sys_sbrk(void)
   if(argint(0, &n) < 0)
     return -1;
   addr = myproc()->sz;
-  if(growproc(n) < 0)
-    return -1;
+  /*  注释掉growproc，因为在growproc中实现了页面的分配，只需要将进程的sz增大即可*/
+  //if(growproc(n) < 0)
+  //   return -1;
+  myproc()->sz += n;
   return addr;
 }
 
